@@ -3,6 +3,7 @@ const { ModuleFederationPlugin } = require('webpack').container;
 const ExternalTemplateRemotesPlugin = require('external-remotes-plugin');
 const path = require('path');
 const app2Config = require('../app2/webpack.config.js');
+const app3Config = require('../app3/webpack.config.js');
 
 module.exports = [
   {
@@ -31,7 +32,8 @@ module.exports = [
       new ModuleFederationPlugin({
         name: 'app1',
         remotes: {
-          app2: 'app2@[app2Url]/remoteEntry.js',
+          app2: 'app2@[app2Url]/app2/remoteEntry.js',
+          app3: 'app3@[app2Url]/app3/remoteEntry.js',
         },
         shared: {
           react: { singleton: true },
@@ -45,4 +47,5 @@ module.exports = [
     ],
   },
   app2Config,
+  app3Config
 ];
